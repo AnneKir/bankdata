@@ -1,0 +1,2 @@
+INSERT INTO BankAccount(id, firstName, lastName, balance) VALUES (nextVal('BankAccount_SEQ'), 'Alice', 'Doe', 100);
+INSERT INTO BankAccount(id, firstName, lastName, balance) VALUES (nextVal('BankAccount_SEQ'), 'Bob', 'Doe', 100);
