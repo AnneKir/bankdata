@@ -31,7 +31,7 @@ To get a list of the current customers in the bank send a GET request to the end
 ```java
 @GET
 @Path("accounts")
-public String accounts()
+public String accounts();
 ```
 http://localhost:8080/bank/accounts
 
@@ -49,7 +49,7 @@ public Response create(
   @QueryParam("firstName") String firstName,
   @QueryParam("lastName") String lastName,
   @QueryParam("balance") int balance
-)
+);
 ```
 Example url
 ```http request
@@ -72,7 +72,7 @@ To add to the balance of an existing account use a POST request to the endpoint
 public Response deposit(
   @QueryParam("name") String name,
   @QueryParam("balance") int balance
-)
+);
 ```
 where `name` is the concatenated full name and `balance` is the amount to add.  
 
@@ -89,7 +89,7 @@ To view the balance of an account, lookup bye the first and last name http://loc
 public String getBalance(
   @PathParam("firstName") String firstName,
   @PathParam("lastName") String lastName
-)
+);
 ```
 
 Curl example
@@ -106,7 +106,7 @@ public String transfer(
   @PathParam("lastName") String lastName,
   @QueryParam("receiver") String to,
   @QueryParam("amount") int amount
-)
+);
 ```
 The sender is indexed by firstName and lastName while the receiver is indexed by firstNameLastName.  
 Example http://localhost:8080/bank/Alice/Doe/transfer?receiver=BobDoe&amount=10 
@@ -123,7 +123,7 @@ curl -X GET --location "http://localhost:8080/bank/Alice/Doe/transfer?receiver=B
 @Path("/exchangeRate") 
 @Produces(MediaType.APPLICATION_JSON) 
 public Map<String, Object> exchangeRate()
-throws JsonProcessingException
+throws JsonProcessingException;
 ```
 http://localhost:8080/bank/exchangeRate 
 
