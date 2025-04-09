@@ -1,9 +1,7 @@
 package com.bank;
 
-import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.response.Response;
-import jakarta.json.Json;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 
@@ -40,10 +38,29 @@ class BankResourceTest {
         .when()
         .get("/bank/createAccount")
         .then()
-        .statusCode(200)
         .body(containsString("Account created for John Doe with balance 100"));
     // Restore
     BankAccount.delete("firstName", "John");
+  }
+
+  @Test
+  @Transactional
+  void testCreateEndpoint() {
+    Response response =
+        given()
+            .queryParam("firstName", "Eve")
+            .queryParam("lastName", "Doe")
+            .queryParam("balance", "200")
+            .when()
+            .post("/bank/create")
+            .then()
+            .extract()
+            .response();
+    assertEquals(201, response.getStatusCode());
+    assertEquals("Eve", response.jsonPath().getString("firstName"));
+
+    // Restore
+    BankAccount.delete("firstName", "Eve");
   }
 
   @Test
@@ -125,7 +142,7 @@ class BankResourceTest {
     BankAccount account = BankAccount.findByName("Alice", "Doe");
     assertEquals(110, account.balance);
 
-    //Restore
+    // Restore
     BankAccount.findByName("AliceDoe").deductBalance(10);
   }
 }

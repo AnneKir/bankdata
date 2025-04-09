@@ -3,7 +3,6 @@ package com.bank;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.json.Json;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.client.Client;
@@ -38,7 +37,7 @@ public class BankResource {
         UriBuilder.fromResource(BankResource.class)
             .path("/%s/%s".formatted(firstName, lastName))
             .build();
-    try{
+    try {
       ObjectMapper mapper = new ObjectMapper();
       String jsonString = mapper.writeValueAsString(bankAccount);
       return Response.status(201).entity(jsonString).location(location).build();

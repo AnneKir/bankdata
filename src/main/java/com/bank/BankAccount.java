@@ -15,6 +15,7 @@ public class BankAccount extends PanacheEntity {
 
   BankAccount(String firstName, String lastName, int balance) {
     this.firstName = firstName;
+    this.lastName = lastName;
     this.balance = balance;
   }
 
