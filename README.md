@@ -51,10 +51,8 @@ public Response create(
   @QueryParam("balance") int balance
 );
 ```
-Example url
-```http request
-http://localhost:8080/bank/create?firstName=John&lastName=Doe&balance=100
-```
+Example url http://localhost:8080/bank/create?firstName=John&lastName=Doe&balance=100
+
 ```curl
 curl -X POST --location "http://localhost:8080/bank/create?firstName=John&lastName=Doe&balance=100"
 ```
